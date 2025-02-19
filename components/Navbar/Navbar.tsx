@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BookMarkedIcon, BookOpen } from "lucide-react";
 import { Button } from "../ui/button";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import SearchInput from "../SearchInput/SearchInput";
 
 const Navbar = () => {
   return (
@@ -17,10 +18,11 @@ const Navbar = () => {
               className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
             >
               <BookOpen className="h-6 w-6 text-primary"></BookOpen>
-              <span className="text-xl font-bold bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
+              <span className="text-sm sm:text-xl font-bold bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
                 KhanDevs
               </span>
             </Link>
+            <SearchInput></SearchInput>
           </div>
           {/* right */}
           <div className=" flex items-center space-x-2 md:space-x-4">
