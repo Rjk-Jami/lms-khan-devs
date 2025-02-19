@@ -15,7 +15,7 @@ export default function UserLayout({
   return (
     <ClerkProvider>
       <div className="min-h-screen flex flex-col">
-      <Navbar></Navbar>
+        <Navbar></Navbar>
         <main> {children}</main>
       </div>
     </ClerkProvider>

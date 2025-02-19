@@ -44,7 +44,7 @@ const Navbar = () => {
             </SignedIn>
 
             <SignedOut>
-              <SignInButton mode="modal">
+              <SignInButton mode="redirect">
                 <Button className="outline">Sign In</Button>
               </SignInButton>
             </SignedOut>
