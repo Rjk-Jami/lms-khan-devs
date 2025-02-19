@@ -16,7 +16,7 @@ export default defineType({
       title: "Lessons",
       type: "array", 
       of: [{ type: "reference", to: [{ type: "lesson" }] }], 
-      validation: (Rule) => Rule.min(1), 
+      
     }),
   ],
 });

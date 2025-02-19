@@ -53,8 +53,8 @@ export default defineType({
       name: "modules",
       title: "Modules",
       type: "array",
-      of:[{type: "reference", to: [{ type: "modules" }]}],
-      validation: (Rule) => Rule.required().min(1).warning("It's recommended to add at least one module."),
+      of:[{type: "reference", to: [{ type: "module" }]}],
+      
     }),
     defineField({
         name: "instructor",
