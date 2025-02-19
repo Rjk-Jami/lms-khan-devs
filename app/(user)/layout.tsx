@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar/Navbar";
 
 export const metadata: Metadata = {
   title: "LMS-Khan-Devs | Home",
@@ -14,6 +15,7 @@ export default function UserLayout({
   return (
     <ClerkProvider>
       <div className="min-h-screen flex flex-col">
+      <Navbar></Navbar>
         <main> {children}</main>
       </div>
     </ClerkProvider>
