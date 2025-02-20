@@ -338,3 +338,27 @@ export type Student = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Lesson | Enrollment | Course | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Category | Slug | Student;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/lib/students/getStudentByClerkId.ts
+// Variable: getStudentByClerkIdQuery
+// Query: *[_type=="student" && clerkId ==$clerkId] [0]
+export type GetStudentByClerkIdQueryResult = {
+  _id: string;
+  _type: "student";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  clerkUserId?: string;
+  profileImageUrl?: string;
+  createdAt?: string;
+} | null;
+
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    "*[_type==\"student\" && clerkId ==$clerkId] [0]": GetStudentByClerkIdQueryResult;
+  }
+}
