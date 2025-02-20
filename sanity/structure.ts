@@ -60,6 +60,57 @@ export const structure: StructureResolver = (S) =>
                                 .schemaType("instructor")
                                 .documentId(instructorId)
                             ),
+                          S.listItem()
+                            .title("View Courses")
+                            .child(
+                              S.documentList()
+                                .title("Instructor's Courses")
+                                .filter(
+                                  `_type == "course" && instructor._ref == $instructorId`
+                                )
+                                .params({ instructorId })
+                            ),
+                        ])
+                    )
+                ),
+              // Student with options
+              S.listItem()
+                .title("Students")
+                .schemaType("student")
+                .child(
+                  S.documentTypeList("student")
+                    .title("Students")
+                    .child((studentId) =>
+                      S.list()
+                        .title("Student Option")
+                        .items([
+                          // edit student details
+                          S.listItem()
+                            .title("Edit Student Details")
+                            .child(
+                              S.document()
+                                .schemaType("student")
+                                .documentId(studentId)
+                            ),
+                          //  view student's enrolled courses
+                          S.listItem()
+                            .title("View Enrollment")
+                            .child(
+                              S.documentList()
+                                .title("Student Enrollments")
+                                .filter(
+                                  `_type == "enrollment" && student._ref == $studentId`
+                                )
+                                .params({ studentId })
+                            ),
+                          S.listItem()
+                            .title("View Completed Lessons")
+                            .child(
+                              S.documentList()
+                                .title("Completed Lessons")
+                                .schemaType("lessonCompletion")
+                                .filter(`_type == "lessonCompletion" && student._ref == $studentId`).params({studentId}).defaultOrdering([{field: "completedAt", direction:"desc"}])
+                            ),
                         ])
                     )
                 ),
