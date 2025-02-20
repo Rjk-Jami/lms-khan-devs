@@ -35,7 +35,7 @@ export const structure: StructureResolver = (S) =>
             )
         ),
       S.divider(),
-      // student content
+      // User content
       S.listItem()
         .title("User Management")
         .child(
@@ -109,11 +109,25 @@ export const structure: StructureResolver = (S) =>
                               S.documentList()
                                 .title("Completed Lessons")
                                 .schemaType("lessonCompletion")
-                                .filter(`_type == "lessonCompletion" && student._ref == $studentId`).params({studentId}).defaultOrdering([{field: "completedAt", direction:"desc"}])
+                                .filter(
+                                  `_type == "lessonCompletion" && student._ref == $studentId`
+                                )
+                                .params({ studentId })
+                                .defaultOrdering([
+                                  { field: "completedAt", direction: "desc" },
+                                ])
                             ),
                         ])
                     )
                 ),
             ])
+        ),
+      S.divider(),
+      S.listItem()
+        .title("System Management")
+        .child(
+          S.list()
+            .title("System Management")
+            .items([S.documentTypeListItem("category").title("categories")])
         ),
     ]);
