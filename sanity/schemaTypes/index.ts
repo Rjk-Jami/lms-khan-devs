@@ -6,7 +6,8 @@ import enrollment from './enrollment'
 import instructor from './instructor'
 import lesson from './lesson'
 import moduleType from './moduleType'
+import lessonCompletion from './lessonCompletion'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [student, category, course, enrollment, instructor, lesson, moduleType, ],
+  types: [student, category, course, enrollment, instructor, lesson, moduleType,lessonCompletion ],
 }
