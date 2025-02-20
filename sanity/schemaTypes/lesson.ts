@@ -37,14 +37,12 @@ export default defineType({
           type: "url",
         }),
         defineField({
-          name: "pdfFile",
-          title: "PDF File",
-          type: "file",
-        }),
-        defineField({
-          name: "textContent",
-          title: "Text Content",
-          type: "text",
+          name: "bannerImage",
+          title: "Banner Image",
+          type: "image",
+          options: {
+            hotspot: true, 
+          },
         }),
       ],
     }),

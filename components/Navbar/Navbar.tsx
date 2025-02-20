@@ -38,7 +38,7 @@ const Navbar = () => {
               </SignedIn>
             </nav>
             <ModeToggle></ModeToggle>
-
+          
             <SignedIn>
               <UserButton />
             </SignedIn>
