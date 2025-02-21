@@ -1,6 +1,8 @@
+import { CourseProgress } from "@/components/CourseProgress/CourseProgress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GetCoursesQueryResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
+import { BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -52,8 +54,46 @@ const CourseCard = ({ course, progress, href }: CourseCardProps) => {
           <p className="text-muted-foreground mb-2 line-clamp-2 flex-1">
             {course.description}
           </p>
+
+          {/* instructor Details */}
+          <div className="mt-2">
+            <div className="flex items-center justify-between">
+              {course.instructor && (
+                <div className="flex items-center ">
+                  <div className="relative h-8 w-8 ">
+                    {/*instructor image */}
+                    {course.instructor.photo ? (
+                      <Image
+                        src={urlFor(course.instructor.photo).url() || ""}
+                        alt={course.title || "Course image"}
+                        fill
+                        className="rounded-full border-2 border-secondary"
+                      />
+                    ) : (
+                      <div className="h-full w-full flex items-center justify-center ">
+                        {/* if no card image, skeleton show up  */}
+                        <Skeleton className="w-full h-full rounded-full" />
+                      </div>
+                    )}
+                  </div>
+                  {/* instructor name */}
+                  <span className="text-sm text-muted-foreground">
+                    by {course.instructor.name}
+                  </span>
+                </div>
+              )}
+              <BookOpen className="h-4 w-4 text-muted-foreground"></BookOpen>
+            </div>
+          </div>
+
           {/* progress */}
-          {progress !== undefined && <div className=""></div>}
+          {progress !== undefined && (
+            <CourseProgress progress={progress}
+            variant="default"
+            size="sm"
+            label="Course Progress"
+             />
+          )}
         </div>
       </div>
     </Link>

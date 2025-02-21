@@ -16,7 +16,7 @@ const CourseContainer = async () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {courses.map((course)=>(
           
-            <CourseCard key={course._id} course={course} href={`/courses/${course.slug}`}/>
+            <CourseCard progress={50} key={course._id} course={course} href={`/courses/${course.slug}`}/>
         ))}
       </div>
     </div>
