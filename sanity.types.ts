@@ -403,6 +403,11 @@ export type GetCoursesQueryResult = Array<{
   } | null;
 }>;
 
+// Source: ./sanity/lib/courses/searchCourses.ts
+// Variable: searchQuery
+// Query: *[type == "course" && (        title match $searchQuery + "*" ||         description match $searchQuery + "*" ||         category->name match $searchQuery + "*"      )] {        ...,        "slug":slug.current,        "category":category->{...},        "instructor":instructor->{...}    }
+export type SearchQueryResult = Array<never>;
+
 // Source: ./sanity/lib/students/getStudentByClerkId.ts
 // Variable: getStudentByClerkIdQuery
 // Query: *[_type=="student" && clerkId ==$clerkId] [0]
@@ -425,6 +430,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type==\"course\"]{\n        ...,\n        \"slug\":slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n     }": GetCoursesQueryResult;
+    "*[type == \"course\" && (\n        title match $searchQuery + \"*\" || \n        description match $searchQuery + \"*\" || \n        category->name match $searchQuery + \"*\"  \n    )] {\n        ...,\n        \"slug\":slug.current,\n        \"category\":category->{...},\n        \"instructor\":instructor->{...}\n    }": SearchQueryResult;
     "*[_type==\"student\" && clerkId ==$clerkId] [0]": GetStudentByClerkIdQueryResult;
   }
 }

@@ -1,12 +1,21 @@
+import searchCourses from "@/sanity/lib/courses/searchCourses";
+import { redirect } from "next/navigation";
+
 interface SearchPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
-
+// searchParams from next.js
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
-  const term = await(await searchParams).term;
-  console.log(term);
+  // query name courseQuery
+  const courseQuery = await (await searchParams).courseQuery;
+  console.log(courseQuery);
 
-  return <div>Search Param: {term}</div>;
+  if(!courseQuery || typeof courseQuery !== "string"){
+   return redirect('/')
+  }
+const courses = await searchCourses(courseQuery)
+console.log(courses, "courses")
+  return <div>Search Param: {courseQuery}</div>;
 };
 
 export default SearchPage;
