@@ -338,6 +338,72 @@ export type Student = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Lesson | Enrollment | Course | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Category | Slug | Student;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/lib/courses/getCourseBySlug.ts
+// Variable: getCoursesBySlugQuery
+// Query: *[_type=="course" && slug.current ==$slug] [0]{          ...,                    "category": category->{...},          "instructor": instructor->{...},          "module": module->{            ...,            "lesson":lesson->{...}          }       }
+export type GetCoursesBySlugQueryResult = {
+  _id: string;
+  _type: "course";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  price?: number;
+  slug?: Slug;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  category: {
+    _id: string;
+    _type: "category";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    slug?: Slug;
+    description?: string;
+    icon?: string;
+  } | null;
+  modules?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "module";
+  }>;
+  instructor: {
+    _id: string;
+    _type: "instructor";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    designation?: string;
+    bio?: string;
+    photo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
+  module: null;
+} | null;
+
 // Source: ./sanity/lib/courses/getCourses.ts
 // Variable: getCoursesQuery
 // Query: *[_type=="course"]{        ...,        "slug":slug.current,        "category": category->{...},        "instructor": instructor->{...}     }
@@ -405,8 +471,68 @@ export type GetCoursesQueryResult = Array<{
 
 // Source: ./sanity/lib/courses/searchCourses.ts
 // Variable: searchQuery
-// Query: *[type == "course" && (        title match $searchQuery + "*" ||         description match $searchQuery + "*" ||         category->name match $searchQuery + "*"      )] {        ...,        "slug":slug.current,        "category":category->{...},        "instructor":instructor->{...}    }
-export type SearchQueryResult = Array<never>;
+// Query: *[_type == "course" && (        // grop         title match $courseQuery + "*" ||         description match $courseQuery + "*" ||         category->name match $courseQuery + "*"      )] {        ...,        "slug":slug.current,        "category":category->{...},        "instructor":instructor->{...}    }
+export type SearchQueryResult = Array<{
+  _id: string;
+  _type: "course";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  price?: number;
+  slug: string | null;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  category: {
+    _id: string;
+    _type: "category";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    slug?: Slug;
+    description?: string;
+    icon?: string;
+  } | null;
+  modules?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "module";
+  }>;
+  instructor: {
+    _id: string;
+    _type: "instructor";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    designation?: string;
+    bio?: string;
+    photo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
+}>;
 
 // Source: ./sanity/lib/students/getStudentByClerkId.ts
 // Variable: getStudentByClerkIdQuery
@@ -429,8 +555,9 @@ export type GetStudentByClerkIdQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type==\"course\" && slug.current ==$slug] [0]{\n          ...,\n          \n          \"category\": category->{...},\n          \"instructor\": instructor->{...},\n          \"module\": module->{\n            ...,\n            \"lesson\":lesson->{...}\n          }\n       }": GetCoursesBySlugQueryResult;
     "*[_type==\"course\"]{\n        ...,\n        \"slug\":slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n     }": GetCoursesQueryResult;
-    "*[type == \"course\" && (\n        title match $searchQuery + \"*\" || \n        description match $searchQuery + \"*\" || \n        category->name match $searchQuery + \"*\"  \n    )] {\n        ...,\n        \"slug\":slug.current,\n        \"category\":category->{...},\n        \"instructor\":instructor->{...}\n    }": SearchQueryResult;
+    "*[_type == \"course\" && (\n        // grop \n        title match $courseQuery + \"*\" || \n        description match $courseQuery + \"*\" || \n        category->name match $courseQuery + \"*\"  \n    )] {\n        ...,\n        \"slug\":slug.current,\n        \"category\":category->{...},\n        \"instructor\":instructor->{...}\n    }": SearchQueryResult;
     "*[_type==\"student\" && clerkId ==$clerkId] [0]": GetStudentByClerkIdQueryResult;
   }
 }
