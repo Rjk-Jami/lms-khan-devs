@@ -20,11 +20,11 @@ export default defineType({
       description: "Reference to the lesson that was completed",
     }),
     defineField({
-      name: "module",
-      title: "Module",
+      name: "moduleOfCourse",
+      title: "Module of Course",
       type: "reference",
-      to: [{ type: "modules" }],
-      description: "Reference to the module containing the lesson",
+      to: [{ type: "moduleOfCourse" }],
+      description: "Reference to the moduleOfCourse containing the lesson",
     }),
     defineField({
       name: "course",

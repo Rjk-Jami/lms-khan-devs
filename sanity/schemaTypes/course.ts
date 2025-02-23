@@ -50,10 +50,10 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "modules",
-      title: "Modules",
+      name: "moduleOfCourse",
+      title: "Module of Course",
       type: "array",
-      of:[{type: "reference", to: [{ type: "modules" }]}],
+      of:[{type: "reference", to: [{ type: "moduleOfCourse" }]}],
       
     }),
     defineField({

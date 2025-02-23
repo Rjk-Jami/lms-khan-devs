@@ -1,8 +1,8 @@
 import { defineType, defineField } from "sanity";
 
 export default defineType({
-  name: "modules",
-  title: "Modules",
+  name: "moduleOfCourse",
+  title: "Module of Course",
   type: "document",
   fields: [
     defineField({
@@ -17,6 +17,5 @@ export default defineType({
       type: "array",
       of: [{ type: "reference", to: [{ type: "lesson" }] }],
     }),
-    
   ],
 });
