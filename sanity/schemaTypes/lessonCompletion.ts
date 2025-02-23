@@ -23,7 +23,7 @@ export default defineType({
       name: "module",
       title: "Module",
       type: "reference",
-      to: [{ type: "module" }],
+      to: [{ type: "modules" }],
       description: "Reference to the module containing the lesson",
     }),
     defineField({

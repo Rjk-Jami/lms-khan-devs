@@ -10,11 +10,8 @@ const getCourseBySlug = async (slug: string) => {
           
           "category": category->{...},
           "instructor": instructor->{...},
-          "module": module->{
-            ...,
-            "lesson":lesson->{...}
-          }
-       }`);
+          "modules": modules[]{ title, lesson->{...} } 
+          }`);
 
   const course = await sanityFetch({
     query: getCoursesBySlugQuery,

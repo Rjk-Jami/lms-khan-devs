@@ -53,7 +53,7 @@ export default defineType({
       name: "modules",
       title: "Modules",
       type: "array",
-      of:[{type: "reference", to: [{ type: "module" }]}],
+      of:[{type: "reference", to: [{ type: "modules" }]}],
       
     }),
     defineField({
