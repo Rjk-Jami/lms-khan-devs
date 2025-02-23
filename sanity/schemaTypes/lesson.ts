@@ -41,7 +41,7 @@ export default defineType({
           title: "Banner Image",
           type: "image",
           options: {
-            hotspot: true, 
+            hotspot: true,
           },
         }),
       ],
@@ -49,8 +49,20 @@ export default defineType({
     defineField({
       name: "content",
       title: "Content",
-      type: "array", // Content is an array
-      of: [{ type: "block" }], 
+      type: "array",
+      of: [{ type: "block" }],
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      media: "media.bannerImage",
+    },
+    prepare({ title, media }) {
+      return {
+        title: title,
+        media: media, 
+      };
+    },
+  },
 });
