@@ -10,10 +10,10 @@ const searchCourses = async(courseQuery : string) => {
         description match $courseQuery + "*" || 
         category->name match $courseQuery + "*"  
     )] {
-        ...,
-        "slug":slug.current,
-        "category":category->{...},
-        "instructor":instructor->{...}
+        // ...,
+        // "slug":slug.current,
+        // "category":category->{...},
+        // "instructor":instructor->{...}
     }`)
 // fetch from server
     const courses = await sanityFetch({
