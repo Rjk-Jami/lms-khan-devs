@@ -399,7 +399,7 @@ export type GetCoursesBySlugQueryResult = {
 
 // Source: ./sanity/lib/courses/getCourses.ts
 // Variable: getCoursesQuery
-// Query: *[_type=="course"]{        ...,        "slug":slug.current,        "category": category->{...},        "instructor": instructor->{...}     }
+// Query: *[_type=="course"]{        ...,        "slug":slug.current,        "category": category->{...},        "instructor": instructor->{...},        "modules": modules->{..., "lesson": lesson->{...}}     }
 export type GetCoursesQueryResult = Array<{
   _id: string;
   _type: "course";
@@ -432,13 +432,7 @@ export type GetCoursesQueryResult = Array<{
     description?: string;
     icon?: string;
   } | null;
-  modules?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "modules";
-  }>;
+  modules: null;
   instructor: {
     _id: string;
     _type: "instructor";
@@ -549,7 +543,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type==\"course\" && slug.current ==$slug] [0]{\n          ...,\n          \n          \"category\": category->{...},\n          \"instructor\": instructor->{...},\n          \"modules\": modules->{..., \"lesson\":lesson->{...}\n          }\n       }": GetCoursesBySlugQueryResult;
-    "*[_type==\"course\"]{\n        ...,\n        \"slug\":slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n     }": GetCoursesQueryResult;
+    "*[_type==\"course\"]{\n        ...,\n        \"slug\":slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...},\n        \"modules\": modules->{..., \"lesson\": lesson->{...}}\n     }": GetCoursesQueryResult;
     "*[_type == \"course\" && (\n        // grop \n        title match $courseQuery + \"*\" || \n        description match $courseQuery + \"*\" || \n        category->name match $courseQuery + \"*\"  \n    )] {\n        ...,\n        \"slug\":slug.current,\n        \"category\":category->{...},\n        \"instructor\":instructor->{...}\n    }": SearchQueryResult;
     "*[_type==\"student\" && clerkId ==$clerkId] [0]": GetStudentByClerkIdQueryResult;
   }

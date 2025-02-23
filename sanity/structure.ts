@@ -21,6 +21,7 @@ export const structure: StructureResolver = (S) =>
                     .child(
                       S.document().schemaType("course").documentId(courseId)
                     ),
+
                   S.listItem()
                     .title("View Student")
                     .child(
@@ -31,6 +32,14 @@ export const structure: StructureResolver = (S) =>
                         )
                         .params({ courseId })
                     ),
+                  // S.listItem()
+                  //   .title("View Course Modules")
+                  //   .child(
+                  //     S.documentList()
+                  //       .title("Course Modules")
+                  //       .filter(`_type == "modules" && references($courseId)`)
+                  //       .params({ courseId })
+                  //   ),
                 ])
             )
         ),

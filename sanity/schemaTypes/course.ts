@@ -65,4 +65,22 @@ export default defineType({
       }),
 
   ],
+  preview: {
+    select: {
+      title: "title",
+      price: "price",
+      categoryName: "category.name",
+      instructorName: "instructor.name",
+      image: "image",
+    },
+    prepare(selection) {
+      const { title, price, categoryName, instructorName, image } = selection;
+      return {
+        title: title,
+        subtitle: `${categoryName} | $${price} | Instructor: ${instructorName}`,
+        media: image ? { asset: { _ref: image.asset._ref } } : null,
+      };
+    },
+  },
+  
 });

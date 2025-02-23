@@ -7,7 +7,8 @@ const getCourses = async () => {
         ...,
         "slug":slug.current,
         "category": category->{...},
-        "instructor": instructor->{...}
+        "instructor": instructor->{...},
+        
      }`);
 
   const course = await sanityFetch({
