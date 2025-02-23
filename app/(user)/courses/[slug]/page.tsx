@@ -86,6 +86,7 @@ const CoursePage = async ({ params }: coursePageProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <div className="bg-card border border-border p-6 mb-4">
+              {/* Course Content */}
               <h2 className="text-2xl font-bold mb-4">Course Content</h2>
               <div className="space-y-4">
                 {course.moduleOfCourse?.map((module, moduleIndex) => (
@@ -93,12 +94,13 @@ const CoursePage = async ({ params }: coursePageProps) => {
                     key={module._id}
                     className="rounded-lg border border-border "
                   >
+                    {/* module.title */}
                     <div className="p-4 border-b border-border">
                       <h3 className="font-semibold">
                         Module {moduleIndex + 1}: {module.title}
                       </h3>
                     </div>
-                    <div className=" ">
+                    <div className=" divide-border divide-y">
                      {
                       module?.lessons?.map((les, lesIndex)=>(
                         <div className="p-4 hover:bg-muted/50 transition-colors " key={les._id}>
