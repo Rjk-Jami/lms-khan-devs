@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import getCourseBySlug from "@/sanity/lib/courses/getCourseBySlug";
 import { urlFor } from "@/sanity/lib/image";
 import { auth } from "@clerk/nextjs/server";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, BookOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,7 +14,7 @@ interface coursePageProps {
 const CoursePage = async ({ params }: coursePageProps) => {
   const { slug } = await params;
   const course = await getCourseBySlug(slug);
-console.log(course)
+  console.log(course);
   const { userId } = await auth();
 
   //todo : implement isEnrolledCourse
@@ -87,14 +87,37 @@ console.log(course)
           <div className="lg:col-span-2">
             <div className="bg-card border border-border p-6 mb-4">
               <h2 className="text-2xl font-bold mb-4">Course Content</h2>
-            </div>
-            <div className="">
-              
-              {/* {course.modules?.map((module, moduleIndex)=>(
-                <div key={moduleIndex} className="">
-                  <h3>Module {moduleIndex + 1}: {module.title}</h3>
-                </div>
-              ))} */}
+              <div className="space-y-4">
+                {course.moduleOfCourse?.map((module, moduleIndex) => (
+                  <div
+                    key={module._id}
+                    className="rounded-lg border border-border "
+                  >
+                    <div className="p-4 border-b border-border">
+                      <h3 className="font-semibold">
+                        Module {moduleIndex + 1}: {module.title}
+                      </h3>
+                    </div>
+                    <div className=" ">
+                     {
+                      module?.lessons?.map((les, lesIndex)=>(
+                        <div className="p-4 hover:bg-muted/50 transition-colors " key={les._id}>
+                          <div className="flex items-center gap-4">
+                            <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center  font-bold flex-shrink-0">
+                              <span className="text-sm">{lesIndex + 1}</span>
+                            </div>
+                            <div className="flex items-center gap-3 text-foreground">
+                              <BookOpen className="h-4 w-4 text-muted-foreground"></BookOpen>
+                                <span className="font-medium text-sm ">{les.title}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                     }
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
