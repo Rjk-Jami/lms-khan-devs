@@ -89,7 +89,7 @@ console.log(course)
               <h2 className="text-2xl font-bold mb-4">Course Content</h2>
             </div>
             <div className="">
-              {course.}
+              
               {/* {course.modules?.map((module, moduleIndex)=>(
                 <div key={moduleIndex} className="">
                   <h3>Module {moduleIndex + 1}: {module.title}</h3>
