@@ -30,8 +30,25 @@ export default defineType({
     defineField({
       name: "icon",
       title: "Icon",
-      type: "string",
-      description: "Icon identifier (e.g., for using with icon libraries)",
+      type: "image",
+      options: {
+        hotspot: true, // Allows image cropping
+      },
+      description: "Upload an icon representing this category",
     }),
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "description",
+      media: "icon",
+    },
+    prepare({ title, subtitle, media }) {
+      return {
+        title,
+        subtitle,
+        media,
+      };
+    },
+  },
 });
