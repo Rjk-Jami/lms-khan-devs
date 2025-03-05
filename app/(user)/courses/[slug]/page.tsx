@@ -82,7 +82,7 @@ const CoursePage = async ({ params }: coursePageProps) => {
       {/* hero section end */}
 
       {/* main content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 mb-0">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <div className="bg-card border border-border p-6 mb-4">
